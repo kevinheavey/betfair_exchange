@@ -46,7 +46,7 @@ def _get_prices_df_long(path):
                      .eval('last_traded_probability=1/ltp', inplace=False)
                      .assign(publish_time=lambda df: pd.to_datetime(df['pt'], unit='ms'))
                      .drop(['ltp', 'pt'], axis=1)
-                     .merge(runner_ids[['id', 'name']], on='id')
+                     .merge(runner_ids_df[['id', 'name']], on='id')
                      .rename(columns={'id':'runner_id', 'name':'runner_name'})
                       [['publish_time', 'runner_id', 'runner_name', 'last_traded_probability']])
     return prices_df_long
